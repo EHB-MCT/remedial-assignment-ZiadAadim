@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tiny Webshop Sim</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    :root { --bg:#0b0f14; --card:#121820; --muted:#8893a2; --text:#e6edf3; --ok:#6ee7b7; --warn:#fbbf24; --err:#f87171; }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background: var(--bg); color: var(--text); }
+    header { display:flex; align-items:center; justify-content:space-between; padding: 16px 20px; border-bottom: 1px solid #1e2633; position: sticky; top:0; background: rgba(11,15,20,.8); backdrop-filter: blur(6px); z-index:10; }
+    header h1 { margin:0; font-size: 18px; letter-spacing:.2px; }
+    header .actions { display:flex; gap:10px; align-items:center; }
+    button { background:#1e2936; color:var(--text); border:1px solid #2a3547; padding: 8px 12px; border-radius:10px; cursor:pointer; font-weight:600; }
+    button:hover { border-color:#3a4861; }
+    button[disabled] { opacity:.5; cursor:not-allowed; }
+    main { max-width:1100px; margin: 20px auto; padding: 0 16px 80px; }
+    .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+    .card { background:var(--card); border:1px solid #1e2633; border-radius:16px; padding:12px; display:flex; flex-direction:column; gap:10px; }
+    .row { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+    .name { font-weight:600; }
+    .muted { color: var(--muted); font-size: 12px; }
+    .price { font-size: 20px; font-weight: 700; }
+    .stock { font-size:12px; color: var(--muted); }
+    .controls { display:flex; gap:8px; }
+    canvas { width:100% !important; height: 150px !important; }
+    .cart { position: fixed; right: 16px; bottom: 16px; width: 320px; max-height: 60vh; background: var(--card); border:1px solid #1e2633; border-radius: 14px; box-shadow: 0 10px 30px rgba(0,0,0,.35); padding:12px; display:flex; flex-direction:column; gap:8px; }
+    .cart h3 { margin: 4px 0 0; font-size: 16px; }
+    .cart-items { overflow:auto; display:flex; flex-direction:column; gap:8px; }
+    .cart-empty { color: var(--muted); font-size: 13px; }
+    .total { font-weight:700; }
+    .badge { font-size:11px; padding:2px 6px; border-radius:999px; border:1px solid #2a3547; color: var(--muted); }
+    .ok { color: var(--ok); border-color: #1f473a; }
+    .warn { color: var(--warn); border-color: #4a3a12; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🛒 Tiny Webshop Simulation</h1>
+    <div class="actions">
+      <span id="tickStatus" class="badge">sim: unknown</span>
+      <span id="backendStatus" class="badge warn">backend: probing…</span>
+      <button id="btnStart" disabled>Start</button>
+      <button id="btnPause" disabled>Pause</button>
+      <button id="btnStep" disabled>Step</button>
+    </div>
+  </header>
+
+  <main>
+    <p class="muted">Prices auto-adjust based on sales & views. If no backend is detected, this page runs in <b>mock mode</b> with fake data.</p>
+    <section class="grid" id="products"></section>
+    <section id="analytics" style="margin-top:24px;">
+  <h2 style="font-size:16px;margin:0 0 8px;">Analytics</h2>
+  <p class="muted" style="margin:0 0 12px;">
+    Best sellers (last ticks) and stock distribution.
+  </p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
+    <div class="card">
+      <div class="row"><div class="name">Best Sellers</div></div>
+      <canvas id="chart-bestsellers"></canvas>
+    </div>
+    <div class="card">
+      <div class="row"><div class="name">Stock Distribution</div></div>
+      <canvas id="chart-stockdist"></canvas>
+    </div>
+  </div>
+</section>
+  </main>
+
+  <aside class="cart" id="cart">
+    <div class="row">
+      <h3>Your cart</h3>
+      <button id="btnCheckout">Checkout</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty">Cart is empty.</div>
+    </div>
+    <div class="row">
+      <div class="muted">Items: <span id="cartCount">0</span></div>
+      <div class="total">€ <span id="cartTotal">0.00</span></div>
+    </div>
+  </aside>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
