@@ -60,3 +60,9 @@ npm install
 npm run dev
 # server at http://localhost:3000
 # health: http://localhost:3000/api/health
+
+## Seeding the database
+```bash
+cp .env.example .env   # if not done yet; then edit MONGODB_URI / DBNAME
+npm run seed
+Seeds 4 cryptos: JugoCoin, Rotom, Porygon, Kassir (upsert by SKU).
