@@ -149,11 +149,12 @@ async function getProducts() {
     products = await fetchJSON('/api/products');
   } catch {
     products = [
-      { _id: 'p1', sku:'SKU-001', name:'Wheat Flour 1kg', currentPrice: 1.99, stock: 87 },
-      { _id: 'p2', sku:'SKU-002', name:'Olive Oil 500ml', currentPrice: 6.49, stock: 42 },
-      { _id: 'p3', sku:'SKU-003', name:'Coffee Beans 250g', currentPrice: 4.25, stock: 120 },
-      { _id: 'p4', sku:'SKU-004', name:'Pasta 500g', currentPrice: 1.15, stock: 200 }
-    ];
+  { _id: 'p1', sku:'SKU-001', name:'JugoCoin', currentPrice: 199.99, stock: 87 },
+  { _id: 'p2', sku:'SKU-002', name:'Rotom', currentPrice: 649.49, stock: 42 },
+  { _id: 'p3', sku:'SKU-003', name:'Porygon', currentPrice: 425.75, stock: 120 },
+  { _id: 'p4', sku:'SKU-004', name:'Kassir', currentPrice: 1150.00, stock: 200 }
+];
+
   }
   await renderProducts();
   await loadAnalyticsCharts();

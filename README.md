@@ -3,15 +3,15 @@
 
 Deadline DEV5 --> 18/08/2025
 
-# Tiny Webshop Economy Simulation
+# Tiny Crypto Economy Simulation
 
-A minimal **webshop** with **dynamic pricing** driven by simulated demand/supply signals.  
+A minimal **crypto webshop** with **dynamic pricing** driven by simulated demand/supply signals.  
 **Frontend:** HTML + CSS + JS + Chart.js  
 **Backend:** Node.js + Express  
 **DB:** MongoDB
 
 ## What it does
-- Shows products with live prices, stock, and a small price history graph
+- Shows crypto coins with live prices, stock, and a small price history graph
 - Users can add to cart and “buy”
 - A background simulation updates prices based on:
   - Sales velocity
@@ -54,3 +54,9 @@ For now, open `public/index.html` in your browser (mock mode works without backe
 ## License
 MIT
 
+## Running the backend (scaffold)
+```bash
+npm install
+npm run dev
+# server at http://localhost:3000
+# health: http://localhost:3000/api/health
