@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { ObjectId } from "mongodb";
 import { colProducts, colPricePoints } from "../collections.js";
+import { calculateNextPrice } from "../pricing.js";
+
 
 const router = Router();
 
@@ -64,6 +66,42 @@ router.get("/products/:id/history", async (req, res, next) => {
       out.push({ tick: i, price: v });
     }
     return res.json(out);
+  } catch (e) {
+    next(e);
+  }
+});
+
+/** POST /api/products/:id/reprice */
+router.post("/products/:id/reprice", async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const { ObjectId } = await import("mongodb");
+    let _id;
+    try {
+      _id = new ObjectId(id);
+    } catch {
+      return res.status(400).json({ error: "invalid product id" });
+    }
+
+    const product = await colProducts().findOne({ _id });
+    if (!product) return res.status(404).json({ error: "product not found" });
+
+    const newPrice = calculateNextPrice(product);
+
+    // Save new price in DB
+    await colProducts().updateOne(
+      { _id },
+      { $set: { currentPrice: newPrice, updatedAt: new Date() } }
+    );
+
+    // Log it in pricePoints history
+    await colPricePoints().insertOne({
+      productId: _id,
+      price: newPrice,
+      createdAt: new Date(),
+    });
+
+    res.json({ oldPrice: product.currentPrice, newPrice });
   } catch (e) {
     next(e);
   }
