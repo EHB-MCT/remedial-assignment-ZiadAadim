@@ -10,6 +10,7 @@ import cors from "cors";
 import { PORT, NODE_ENV, APP_NAME, APP_VERSION } from "./config.js";
 import { connectDB, getDB, closeDB } from "./db.js";
 import productsRouter from "./routes/products.js";
+import { initSimulation, startSimulation, getSimState, tickOnce, pauseSimulation } from "./sim.js";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -25,6 +26,10 @@ app.use(cors());
 
 // Mount your API routes here vv
 app.use("/api", productsRouter);
+
+app.get("/api/sim/state", (req, res) => {
+  res.json(getSimState());
+});
 
 
 // health route (reports DB status)
@@ -54,6 +59,10 @@ async function start() {
   try {
     await connectDB();
     app.locals.db = getDB();
+
+    await initSimulation();
+    startSimulation(); // auto-start background loop
+
     app.listen(PORT, () => {
       console.log(`[${APP_NAME}] listening on http://localhost:${PORT} (${NODE_ENV})`);
     });
