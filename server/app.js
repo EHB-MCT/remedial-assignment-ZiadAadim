@@ -9,6 +9,8 @@ import compression from "compression";
 import cors from "cors";
 import { PORT, NODE_ENV, APP_NAME, APP_VERSION } from "./config.js";
 import { connectDB, getDB, closeDB } from "./db.js";
+import productsRouter from "./routes/products.js";
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,6 +22,10 @@ app.use(morgan(NODE_ENV === "production" ? "combined" : "dev"));
 app.use(compression());
 app.use(express.json());
 app.use(cors());
+
+// Mount your API routes here vv
+app.use("/api", productsRouter);
+
 
 // health route (reports DB status)
 app.get("/api/health", async (req, res) => {
