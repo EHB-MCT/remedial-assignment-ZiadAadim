@@ -2,6 +2,7 @@ import { Router } from "express";
 import { ObjectId } from "mongodb";
 import { colProducts, colPricePoints } from "../collections.js";
 import { calculateNextPrice } from "../pricing.js";
+import { readDemandSignal } from "../demand.js";
 
 
 const router = Router();
@@ -75,36 +76,30 @@ router.get("/products/:id/history", async (req, res, next) => {
 router.post("/products/:id/reprice", async (req, res, next) => {
   try {
     const id = req.params.id;
-    const { ObjectId } = await import("mongodb");
     let _id;
-    try {
-      _id = new ObjectId(id);
-    } catch {
-      return res.status(400).json({ error: "invalid product id" });
-    }
+    try { _id = new ObjectId(id); }
+    catch { return res.status(400).json({ error: "invalid product id" }); }
 
     const product = await colProducts().findOne({ _id });
     if (!product) return res.status(404).json({ error: "product not found" });
 
-    const newPrice = calculateNextPrice(product);
+    // NEW: read last-60-min demand (neutral if no data yet)
+    const demand = await readDemandSignal(_id, 60);
 
-    // Save new price in DB
+    const newPrice = calculateNextPrice(product, demand);
+
     await colProducts().updateOne(
       { _id },
       { $set: { currentPrice: newPrice, updatedAt: new Date() } }
     );
-
-    // Log it in pricePoints history
     await colPricePoints().insertOne({
       productId: _id,
       price: newPrice,
       createdAt: new Date(),
     });
 
-    res.json({ oldPrice: product.currentPrice, newPrice });
-  } catch (e) {
-    next(e);
-  }
+    res.json({ demand, oldPrice: product.currentPrice, newPrice });
+  } catch (e) { next(e); }
 });
 
 export default router;
