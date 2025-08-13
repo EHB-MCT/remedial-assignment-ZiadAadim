@@ -11,6 +11,8 @@ import { PORT, NODE_ENV, APP_NAME, APP_VERSION } from "./config.js";
 import { connectDB, getDB, closeDB } from "./db.js";
 import productsRouter from "./routes/products.js";
 import { initSimulation, startSimulation, getSimState, tickOnce, pauseSimulation } from "./sim.js";
+import commerceRouter from "./routes/commerce.js";
+
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -26,6 +28,8 @@ app.use(cors());
 
 // Mount your API routes here vv
 app.use("/api", productsRouter);
+app.use("/api", commerceRouter);
+
 
 app.get("/api/sim/state", (req, res) => {
   res.json(getSimState());
