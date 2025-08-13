@@ -12,6 +12,8 @@ import { connectDB, getDB, closeDB } from "./db.js";
 import productsRouter from "./routes/products.js";
 import { initSimulation, startSimulation, getSimState, tickOnce, pauseSimulation } from "./sim.js";
 import commerceRouter from "./routes/commerce.js";
+import trackingRouter from "./routes/tracking.js";
+
 
 
 
@@ -29,6 +31,8 @@ app.use(cors());
 // Mount your API routes here vv
 app.use("/api", productsRouter);
 app.use("/api", commerceRouter);
+app.use("/api", trackingRouter);
+
 
 
 app.get("/api/sim/state", (req, res) => {
