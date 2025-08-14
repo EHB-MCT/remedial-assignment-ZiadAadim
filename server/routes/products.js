@@ -3,7 +3,6 @@ import { ObjectId } from "mongodb";
 import { colProducts, colPricePoints } from "../collections.js";
 import { calculateNextPrice } from "../pricing.js";
 import { readDemandSignal } from "../demand.js";
-import { trimPriceHistory } from "../history.js";
 
 
 const router = Router();
