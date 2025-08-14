@@ -365,3 +365,7 @@ function runSelfTests(){
   updateCartUI();
   runSelfTests();
 })();
+
+setInterval(() => {
+  getProducts(); // re-renders cards & mini charts
+}, 8000);
