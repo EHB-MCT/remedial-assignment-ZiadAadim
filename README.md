@@ -25,18 +25,15 @@ A minimal **crypto webshop** with **dynamic pricing** driven by simulated demand
 - Focuses on backend logic & integration (not just UI)
 - Minimal assets, heavy focus on programming and data flow
 
-## Planned features
+## Features
 1. Product listing with live prices
 2. Price history charts (Chart.js)
 3. Cart and checkout
 4. Simulation loop for dynamic pricing
 5. View tracking for conversion rate
-6. Simulation controls (start, pause, step)
 
-## How to run (will be updated later)
-For now, open `public/index.html` in your browser (mock mode works without backend).
 
-## Branch plan (might change)
+## Branches
 1. `feature/01-repo-setup` — repo setup & docs
 2. `feature/02-frontend-skeleton` — basic HTML/CSS/JS UI with mock data
 3. `feature/03-backend-scaffold` — Express server + health route
@@ -47,14 +44,11 @@ For now, open `public/index.html` in your browser (mock mode works without backe
 8. `feature/08-simulation-loop` — background price updates
 9. `feature/09-checkout-orders-stock` — checkout endpoint
 10. `feature/10-views-tracking` — track views
-11. `feature/11-sim-controls` — simulation control endpoints
-12. `feature/12-tests-docs` — unit tests + docs
-13. `feature/13-cleanups-refactor` — refactor & polish
 
 ## License
 MIT
 
-## Running the backend (scaffold)
+## Running the backend
 ```bash
 npm install
 npm run dev
@@ -63,6 +57,67 @@ npm run dev
 
 ## Seeding the database
 ```bash
-cp .env.example .env   # if not done yet; then edit MONGODB_URI / DBNAME
+cp .env.example .env  
 npm run seed
 Seeds 4 cryptos: JugoCoin, Rotom, Porygon, Kassir (upsert by SKU).
+
+
+```md
+## API (summary)
+
+- `GET /api/products`  
+  Returns: `[{ _id, name, sku, currentPrice, stock }]`
+
+- `GET /api/products/:id/history?limit=40`  
+  Returns: `[{ tick, price }]` (real points; synthetic fallback if none)
+
+- `POST /api/checkout`
+  ```json
+  { "sessionId": "abc", "items": [{ "productId": "<id>", "qty": 2 }] }
+
+  POST /api/track/view
+
+{ "productId": "<id>", "sessionId": "abc" }
+
+Returns: { ok: true } (or { ok: true, throttled: true })
+
+GET /api/health → { ok, db, app, version, env, time }
+
+GET /api/sim/state → { status, tick }
+
+
+- **Modules split by responsibility:**
+  - `db.js` (connection), `collections.js` (repo accessors), `schema.js` (indexes)
+  - `pricing.js` (domain logic), `demand.js` (signals), `history.js` (trimming)
+  - routers per concern: `products`, `commerce`, `tracking`, `sim`
+  - `sim.js` (engine)
+- **Single Responsibility**: each module does one thing.
+- **Open/Closed**: you can tweak pricing or demand without touching routes.
+- **Dependency Inversion**: routes depend on collection accessors, not raw clients.
+- **Docs**: README + `.env.example` + scripts; clear run/seed steps.
+- **Git**: multiple feature branches and commits per feature (you’ve been doing this 👍).
+
+
+ **Health**  
+   `GET /api/health` → `{ ok: true, db: true, ... }`
+
+2. **Products**  
+   `GET /api/products` → 4 coins with prices & stock
+
+3. **History**  
+   `GET /api/products/:id/history?limit=40` → array; after a minute of sim, should be **real** points
+
+4. **Views**  
+   Scroll the page (or Postman):  
+   `POST /api/track/view` → `{ ok: true }` (throttled on rapid repeats)
+
+5. **Checkout**  
+   `POST /api/checkout` with a valid `_id` → stock decrements, order written
+
+6. **Simulation**  
+   Watch server logs:  
+   `[sim] started @ 5000ms` and periodic `tick … · updated 4 products`  
+   Prices change in `/api/products` or on the frontend (polling every ~8s)
+
+7. **Trimming**  
+   `pricePoints` per product shouldn’t grow without bound; caps around your `keep` threshold.
