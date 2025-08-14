@@ -2,7 +2,6 @@ import { SIM_INTERVAL_MS } from "./config.js";
 import { colProducts, colPricePoints, colTicks } from "./collections.js";
 import { readDemandSignal } from "./demand.js";
 import { calculateNextPrice } from "./pricing.js";
-import { trimPriceHistory } from "./history.js";
 
 let running = false;
 let interval = null;
