@@ -126,6 +126,9 @@ GET /api/sim/state → { status, tick }
 7. **Trimming**  
    `pricePoints` per product shouldn’t grow without bound; caps around your `keep` threshold.
 
+```md
+
+```
 
 
 ### References & Tools Used
@@ -136,11 +139,6 @@ GET /api/sim/state → { status, tick }
 - [ChatGPT](https://chat.openai.com/) — code snippets, debugging assistance, and architectural guidance  
 
 
-## Web App Preview
+C:\Users\ziad-\OneDrive\Bureau\SCHOOL\DEV 5\remedial-assignment-ZiadAadim\docs\screenshots\app 1.png
 
-Here are some screenshots of the application in action:
-
-(C:\Users\ziad-\OneDrive\Bureau\SCHOOL\DEV 5\remedial-assignment-ZiadAadim\docs\screenshots\app 1.png)
-(./docs/screenshots/checkout.png)
-(./docs/screenshots/history.png)
 
