@@ -1,7 +1,9 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/BhMy8Rjk)
 # Portfolio
 
-Deadline DEV5 --> 18/08/2025
+> ℹ️ This README provides a general overview of the project.  
+> For detailed contribution guidelines, conventions, and policies, see [CONTRIBUTING.md](CONTRIBUTING.md), [CONVENTIONS.md](CONVENTIONS.md), and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+
 
 # Tiny Crypto Economy Simulation
 
