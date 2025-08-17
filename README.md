@@ -134,3 +134,13 @@ GET /api/sim/state → { status, tick }
 - [Express.js Documentation](https://expressjs.com/) — API routing and middleware  
 - [Node.js Documentation](https://nodejs.org/docs/) — server runtime  
 - [ChatGPT](https://chat.openai.com/) — code snippets, debugging assistance, and architectural guidance  
+
+
+## Web App Preview
+
+Here are some screenshots of the application in action:
+
+(C:\Users\ziad-\OneDrive\Bureau\SCHOOL\DEV 5\remedial-assignment-ZiadAadim\docs\screenshots\app 1.png)
+(./docs/screenshots/checkout.png)
+(./docs/screenshots/history.png)
+
