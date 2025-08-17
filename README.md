@@ -136,7 +136,8 @@ GET /api/sim/state → { status, tick }
 - [Chart.js](https://www.chartjs.org/docs/latest/) — interactive price history charts  
 - [Express.js Documentation](https://expressjs.com/) — API routing and middleware  
 - [Node.js Documentation](https://nodejs.org/docs/) — server runtime  
-- [ChatGPT](https://chat.openai.com/) — code snippets, debugging assistance, and architectural guidance  
+- [ChatGPT](https://chatgpt.com/share/68a21501-2e10-8005-a0b2-c069266fb2e5) — code snippets, debugging assistance, and architectural guidance (one of different chats)
+- YouTube tutorials (for general learning and project setup inspiration)
 
 
 ## Web App Preview
