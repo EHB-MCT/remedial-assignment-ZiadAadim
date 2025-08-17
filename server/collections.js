@@ -1,4 +1,3 @@
-// server/collections.js
 import { getDB } from "./db.js";
 
 export function colProducts()     { return getDB().collection("products"); }

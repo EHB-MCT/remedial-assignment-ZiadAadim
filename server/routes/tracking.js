@@ -1,4 +1,3 @@
-// server/routes/tracking.js
 import { Router } from "express";
 import { ObjectId } from "mongodb";
 import { colProducts, colViews } from "../collections.js";

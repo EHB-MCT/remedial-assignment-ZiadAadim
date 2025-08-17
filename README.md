@@ -4,6 +4,8 @@
 > ℹ️ This README provides a general overview of the project.  
 > For detailed contribution guidelines, conventions, and policies, see [CONTRIBUTING.md](CONTRIBUTING.md), [CONVENTIONS.md](CONVENTIONS.md), and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
+Note: The codebase contains inline comments throughout the files to help guide you across the structure and logic of the project.
+
 
 # Tiny Crypto Economy Simulation
 
@@ -123,3 +125,12 @@ GET /api/sim/state → { status, tick }
 
 7. **Trimming**  
    `pricePoints` per product shouldn’t grow without bound; caps around your `keep` threshold.
+
+
+
+### References & Tools Used
+- [MongoDB Documentation](https://www.mongodb.com/docs/) — database setup, queries, schema design  
+- [Chart.js](https://www.chartjs.org/docs/latest/) — interactive price history charts  
+- [Express.js Documentation](https://expressjs.com/) — API routing and middleware  
+- [Node.js Documentation](https://nodejs.org/docs/) — server runtime  
+- [ChatGPT](https://chat.openai.com/) — code snippets, debugging assistance, and architectural guidance  

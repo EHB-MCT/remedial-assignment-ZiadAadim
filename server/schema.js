@@ -1,4 +1,3 @@
-// server/schema.js
 import { getDB } from "./db.js";
 
 /**

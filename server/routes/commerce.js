@@ -1,4 +1,3 @@
-// server/routes/commerce.js
 import { Router } from "express";
 import { ObjectId } from "mongodb";
 import { colProducts, colOrders } from "../collections.js";
