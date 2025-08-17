@@ -139,6 +139,22 @@ GET /api/sim/state → { status, tick }
 - [ChatGPT](https://chat.openai.com/) — code snippets, debugging assistance, and architectural guidance  
 
 
-C:\Users\ziad-\OneDrive\Bureau\SCHOOL\DEV 5\remedial-assignment-ZiadAadim\docs\screenshots\app 1.png
+## Web App Preview
+
+Here are some screenshots of the application in action:
+
+<img width="861" height="112" alt="npm run dev" src="https://github.com/user-attachments/assets/77783e7c-10e2-4e53-95e7-1a6fcf129400" />
+
+<img width="1891" height="897" alt="app 1" src="https://github.com/user-attachments/assets/407bb4ad-d538-4a76-a073-8fab4116a201" />
+
+<img width="440" height="263" alt="app 2" src="https://github.com/user-attachments/assets/281cc290-01cc-4336-aca9-fc17ec5a05e0" />
+
+<img width="921" height="497" alt="app 3" src="https://github.com/user-attachments/assets/a9be2ea5-fc5b-4ca0-828e-dd8ab9600989" />
+
+<img width="1662" height="448" alt="app 4" src="https://github.com/user-attachments/assets/d0741cbb-2e51-45b5-b799-45cb5a8cf175" />
+
+
+
+
 
 
